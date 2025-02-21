@@ -10,5 +10,9 @@ export default {
 		extend: {}
 	},
 
-	plugins: [daisyui, typography, forms]
+	plugins: [daisyui, typography, forms],
+
+	daisyui: {
+		themes: ['nord']
+	}
 } satisfies Config;
