@@ -1,5 +1,9 @@
 # **SvelteKit Events App** 📅
 
+![Events List](static/events-list.png)
+
+> **See below for more sreenshots!**
+
 This is an event planning app built using **SvelteKit**. The user can see their current events and is able to add new ones.
 
 The app currently supports server-side rendering (SSR) to fetch events data via the **Events Interface** defined under $lib/server/remote-events.ts, and route-based navigation for different events (e.g., `/eventid`).
@@ -79,3 +83,5 @@ This project has some intentional gaps for you to address. Your task is to compl
 1. Freestyle (Optional)
 
     - Task: Add any other features or improvements you like to show off your knowledge.
+
+   > **Toast messages for create / udpate / delete**
