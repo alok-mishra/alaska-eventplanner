@@ -2,9 +2,15 @@
 	import type { PageData } from "./$types";
 	import { goto } from '$app/navigation';
     import { enhance } from '$app/forms';
+    import Toast from '$lib/components/Toast.svelte';
 
     let {data}: {data: PageData} = $props();
+    let showToast = $state(false);
 </script>
+
+{#if showToast}
+    <Toast message="Event successfully deleted!" />
+{/if}
 
 <div class="container mx-auto px-4 py-8">
     <div class="flex justify-between items-center mb-8 bg-base-200 px-8 py-4 rounded-lg">
@@ -39,23 +45,9 @@
                         use:enhance={() => {
                             return async ({ result }) => {
                                 if (result.type === 'success') {
-                                    const toast = document.createElement('div');
-                                    toast.className = 'toast toast-end';
-                                    toast.innerHTML = `
-                                        <div class="alert alert-success">
-                                            <span>Event successfully deleted!</span>
-                                        </div>
-                                    `;
-                                    document.body.appendChild(toast);
-
-                                    // wait to show the toast before going to the main page
+                                    showToast = true;
                                     await new Promise(resolve => setTimeout(resolve, 1000));
                                     await goto('/');
-
-                                    // Remove the toast after navigation
-                                    setTimeout(() => {
-                                        toast.remove();
-                                    }, 1000);
                                 }
                             };
                         }}

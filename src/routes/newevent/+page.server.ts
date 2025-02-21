@@ -21,7 +21,11 @@ export const actions: Actions = {
 			error(400, 'Title and Date are required');
 		}
 		const newEvent = await createEvent({ title, description, date });
-		redirect(303, `/${newEvent.id}`);
+		return {
+			success: true,
+			message: 'Event created successfully',
+			id: newEvent.id
+		};
 	},
 	update: async ({ request }) => {
 		const formdata = await request.formData();
@@ -35,6 +39,10 @@ export const actions: Actions = {
 			error(400, 'Title and Date are required');
 		}
 		await updateEventById(eventId, updates);
-		redirect(303, `/${eventId}`);
+		return {
+			success: true,
+			message: 'Event updated successfully',
+			id: eventId
+		};
 	}
 };
