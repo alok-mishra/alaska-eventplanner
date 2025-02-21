@@ -1,12 +1,11 @@
 <script lang="ts">
     export let message: string;
-    export let type: 'success' | 'error' = 'success';
 
     let toast: HTMLDivElement;
 
     export function show() {
         document.body.appendChild(toast);
-        return new Promise<void>(resolve => {
+        return new Promise<void>((resolve) => {
             setTimeout(() => {
                 toast.remove();
                 resolve();
@@ -16,7 +15,7 @@
 </script>
 
 <div bind:this={toast} class="toast toast-end">
-    <div class="alert alert-{type}">
+    <div class={`alert alert-success`}>
         <span>{message}</span>
     </div>
 </div>

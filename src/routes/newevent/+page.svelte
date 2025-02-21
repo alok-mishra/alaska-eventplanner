@@ -15,6 +15,9 @@
     });
 
     let isEditing = $state(false);
+
+    // current datetime for local timezone
+    const now = new Date().toLocaleString('sv').replace(' ', 'T').slice(0, 16);
 </script>
 
 {#if showToast}
@@ -36,6 +39,7 @@
                 submitting = false;
                 if (result.type === 'success') {
                     showToast = true;
+                    await new Promise(resolve => setTimeout(resolve, 1000));
                     await goto(isEditing ? `/${result.data?.id}` : '/');
                 }
             };
@@ -84,6 +88,7 @@
                 required
                 class="input input-bordered w-full"
                 value={data.event?.date ?? ''}
+                min={now}
             >
         </div>
 

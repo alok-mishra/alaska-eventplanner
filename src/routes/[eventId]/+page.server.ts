@@ -19,16 +19,5 @@ export const actions: Actions = {
 			success: true,
 			message: 'Event successfully deleted'
 		};
-	},
-	update: async ({ request, params }) => {
-		const eventId = parseInt(params.eventId);
-		const formData = await request.formData();
-		const updates = {
-			title: formData.get('title')?.toString(),
-			description: formData.get('description')?.toString(),
-			date: formData.get('date')?.toString()
-		};
-		await updateEventById(eventId, updates);
-		throw redirect(303, `/${eventId}`);
 	}
 };
