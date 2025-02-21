@@ -10,14 +10,14 @@ The app currently supports server-side rendering (SSR) to fetch events data via 
 
 We recommend using **Visual Studio Code (VS Code)** for this project, as it provides excellent support for SvelteKit development via extensions.
 
-1. **Install Visual Studio Code**  
-   If you don't have VS Code installed, you can download it here:  
+1. **Install Visual Studio Code**
+   If you don't have VS Code installed, you can download it here:
    [https://code.visualstudio.com/](https://code.visualstudio.com/)
 
-2. **Recommended Extensions for VS Code**  
+2. **Recommended Extensions for VS Code**
    This project includes recommended extensions in its workspace settings.
 
-   - When you open the project in VS Code, you will be prompted to **"Install All"** recommended extensions.  
+   - When you open the project in VS Code, you will be prompted to **"Install All"** recommended extensions.
      Click **"Install All"** to quickly set up your environment.
 
    - Alternatively, you can find the recommended extensions by searching **`@recommended`** in the **Extensions pane** in VS Code.
@@ -58,15 +58,23 @@ This project has some intentional gaps for you to address. Your task is to compl
     - Task: Add a way to edit existing events. You can use the same form for adding and editing events.
     - Task: Add a way to delete existing events.
 
+    ![Event Details](static/event-details.png)
+    ![Edit Details](static/update-event.jpg)
+
+
 1. Bug: User is able to submit a new event in the past
 
     - Problem: The user is able to submit a new event with a start date in the past.
     - Task: Prevent the user from submitting a new event with a start date in the past and show appropriate feedback to the user.
 
+    ![Future Date](static/future-date.jpg)
+
 1. Enhancement: Basic Styles
 
     - Problem: There are no styles
     - Task: Improve the design of the UI, you may use any UI libraries you prefer or no libraries at all
+
+    ![Events List](static/events-list.png)
 
 1. Freestyle (Optional)
 
