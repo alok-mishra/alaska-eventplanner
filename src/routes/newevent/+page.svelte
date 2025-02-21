@@ -1,15 +1,27 @@
 <script lang="ts">
     import { enhance } from '$app/forms';
-    let submitting = false;
+    import type { PageData } from './$types';
+
+    let { data }: { data: PageData } = $props();
+    let submitting = $state(false);
+
+    $effect(() => {
+        if (data.event) {
+            isEditing = true;
+        }
+    });
+
+    let isEditing = $state(false);
 </script>
 
 <div class="container mx-auto px-4 py-8 max-w-2xl">
     <div class="flex justify-between items-center mb-8 bg-base-200 px-8 py-4 rounded-lg">
-        <h1 class="text-3xl font-bold">Create New Event</h1>
+        <h1 class="text-3xl font-bold">{isEditing ? 'Edit Event' : 'Create New Event'}</h1>
     </div>
 
     <form
         method="POST"
+        action="?/{isEditing ? 'update' : 'create'}"
         class="card bg-base-300 shadow-xl p-6"
         use:enhance={() => {
             submitting = true;
@@ -19,6 +31,10 @@
             };
         }}
     >
+        {#if isEditing}
+            <input type="hidden" name="eventId" value={data.event?.id}>
+        {/if}
+
         <div class="form-control w-full">
             <label for="title" class="label">
                 <span class="label-text">Title</span>
@@ -30,6 +46,7 @@
                 required
                 class="input input-bordered w-full"
                 placeholder="Event title"
+                value={data.event?.title ?? ''}
             >
         </div>
 
@@ -43,7 +60,7 @@
                 rows="4"
                 class="textarea textarea-bordered"
                 placeholder="Event description"
-            ></textarea>
+            >{data.event?.description ?? ''}</textarea>
         </div>
 
         <div class="form-control w-full mt-4">
@@ -56,6 +73,7 @@
                 name="date"
                 required
                 class="input input-bordered w-full"
+                value={data.event?.date ?? ''}
             >
         </div>
 
@@ -67,13 +85,13 @@
             >
                 {#if submitting}
                     <span class="loading loading-spinner"></span>
-                    Creating...
+                    {isEditing ? 'Saving...' : 'Creating...'}
                 {:else}
-                    Create Event
+                    {isEditing ? 'Save Changes' : 'Create Event'}
                 {/if}
             </button>
 
-            <a href="/" class="btn btn-ghost">Cancel</a>
+            <a href={isEditing ? `/${data.event?.id}` : '/'} class="btn btn-ghost">Cancel</a>
         </div>
     </form>
 </div>
