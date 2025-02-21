@@ -1,6 +1,6 @@
 import { createEvent, fetchEventById, updateEventById } from '$lib/server/remote-events';
 import type { Actions, PageServerLoad } from './$types';
-import { error, redirect } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ url }) => {
 	const editId = url.searchParams.get('edit');
